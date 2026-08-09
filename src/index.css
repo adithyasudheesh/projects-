@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+html,
+body {
+  /* Belt-and-braces guard against any accidental horizontal overflow
+     from absolutely-positioned elements at small viewport widths. */
+  overflow-x: hidden;
+  width: 100%;
+  /* Smoother momentum scrolling on iOS for the page and any nested
+     scroll containers (equipment strip, reagent strip, notebook). */
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Respect the OS-level reduced-motion preference: the lab has several
+   infinite looping animations (bubbles, smoke, heat glow, selection
+   bob) that are decorative rather than functional, so they can be
+   safely stilled for people who've asked for less motion, and this
+   also reduces sustained GPU/CPU load on lower-powered devices. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
